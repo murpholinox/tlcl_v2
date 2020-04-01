@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# case-menu: a menu driven system information program
+
+clear
+echo "
+Please select:
+
+A. Display System Information
+B. Display Disk Space
+C. Display Home Space
+Q. Quit
+"
+read -p "Enter selection [A, B, C or Q] > "
+
+case "$REPLY" in
+	q|Q)	echo "Program terminated."
+		exit
+		;;
+	a|A)	echo "Hostame: $HOSTNAME"
+		uptime
+		;;
+	b|B)	df -h
+		;;
+	c|C) if [[ "$(id -u)" -eq 0 ]]; then
+			echo "Home Space (All)"
+			du -sh /home/*
+		else
+			echo "Home Space ($USER)"
+			du -sh "$HOME"
+		fi
+		;;
+	*)	echo "Invalid entry" >&2
+		exit 1
+		;;
+esac

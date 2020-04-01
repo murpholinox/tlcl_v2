@@ -1,0 +1,16 @@
+#!/bin/bash -x
+
+# tracing_with_line_numbers: script to demonstrate common errors
+
+number=1
+
+oldPS4=$PS4
+export PS4='$LINENO -> '
+
+if [ $number = 1 ]; then
+	echo "Number is equal to 1."
+else
+	echo "Number is not equal to 1."
+fi
+
+export PS4=$oldPS4
